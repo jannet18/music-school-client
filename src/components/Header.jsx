@@ -3,17 +3,18 @@ import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 import { CiYoutube } from "react-icons/ci";
 import { FaXTwitter } from "react-icons/fa6";
+import { MdDashboard } from "react-icons/md";
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
-  const [miniMenu, setMiniMenu] = useState(false);
+  const [dropdownMenu, setDropdownMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
-  const toggleMini = () => {
-    setMiniMenu(!miniMenu);
+  const toggleDropdown = () => {
+    setDropdownMenu(!dropdownMenu);
   };
   return (
     <>
@@ -57,9 +58,98 @@ function Header() {
                   <a href="#" className="py-5 px-3 text-[#f8f8f8]">
                     News
                   </a>
-                  <a href="#" className="py-5 px-3  text-[#f8f8f8]">
-                    pages
-                  </a>
+                  <div className="relative">
+                    <button
+                      type="button"
+                      className="flex items-center py-5 px-3 text-[#f8f8f8] hover:bg-white hover:text-gray-800 rounded-md "
+                      aria-expanded="false"
+                      onClick={toggleDropdown}
+                    >
+                      <span>Pages</span>
+                      <svg
+                        class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                    {dropdownMenu && (
+                      <div className="absolute top-12 left-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-20">
+                        <a href="#" className="block px-4 py-2 text-gray-800">
+                          <MdDashboard className="inline-block mr-2" />
+                          Admin Dashboard
+                        </a>
+                        <a href="#" className="block px-4 py-2 text-gray-800">
+                          <MdDashboard className="inline-block mr-2" />
+                          Teacher Dashboard
+                        </a>
+                        <a href="#" className="block px-4 py-2 text-gray-800">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="inline-block mr-2 h-5 w-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
+                            />
+                          </svg>
+                          Students
+                        </a>
+                      </div>
+                    )}
+                    {/* <div>
+                      <div>
+                        <a href="">Admin Dashboard</a>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="">Teacher Dashboard</a>
+                        <MdDashboard />
+                      </div>
+                      <div>
+                        <a href="">Students </a>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
+                          />
+                        </svg>
+                      </div>
+                    </div> */}
+                  </div>
                   <a href="#" className="py-5 px-3  text-[#f8f8f8]">
                     Contacts
                   </a>
@@ -106,11 +196,60 @@ function Header() {
               News
             </a>
             <a href="#" className="block py-2 px-4 text-sm">
-              Pages
-            </a>
-            <a href="#" className="block py-2 px-4 text-sm">
               Contacts
             </a>
+            <div className="relative px-2">
+              <button
+                type="button"
+                class="py-1.5 px-4 text-sm text-[#f8f8f8] flex items-center hover:bg-white hover:text-gray-800 rounded-md"
+                aria-expanded="false"
+                onClick={toggleDropdown}
+              >
+                <span>Pages</span>
+                <svg
+                  class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              {dropdownMenu && (
+                <div className="absolute left-5 top-7 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-20">
+                  <a href="#" className="block px-4 py-2 text-gray-800">
+                    <MdDashboard className="inline-block mr-2 mb-1" />
+                    Admin Dashboard
+                  </a>
+                  <a href="#" className="block px-4 py-2 text-gray-800">
+                    <MdDashboard className="inline-block mr-2" />
+                    Teacher Dashboard
+                  </a>
+                  <a href="#" className="block px-4 py-2 text-gray-800">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="inline-block mr-2 h-5 w-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
+                      />
+                    </svg>
+                    Students
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </nav>
@@ -123,8 +262,7 @@ function Header() {
             Best Online Education <span>Expertise</span>
           </p>
           <p className="whitespace-pre-line">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptatibus libero reprehenderit harum quibusdam facilis est.
+            Explore our courses and get started with your musical journey!
           </p>
           <div className="flex space-x-4">
             <div className="">

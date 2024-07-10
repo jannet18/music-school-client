@@ -17,7 +17,7 @@ function Newsletter() {
             />
             <button
               type="submit"
-              class="mt-2 rounded bg-emerald-500 p-2 font-bold text-white sm:rounded-l-none sm:rounded-r-md"
+              className="mt-2 rounded bg-emerald-500 p-2 font-bold text-white sm:rounded-l-none sm:rounded-r-md"
             >
               Get First Email
             </button>
