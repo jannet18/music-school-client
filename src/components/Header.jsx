@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 import { CiYoutube } from "react-icons/ci";
@@ -16,6 +16,20 @@ function Header() {
   const toggleDropdown = () => {
     setDropdownMenu(!dropdownMenu);
   };
+
+  useEffect(() => {
+    const handleSize = () => {
+      if (window.innerWidth >= 768) {
+        setShowMenu(false);
+      }
+    };
+
+    window.addEventListener("resize", handleSize);
+
+    return () => {
+      window.removeEventListener("resize", handleSize);
+    };
+  }, []);
   return (
     <>
       <div className="max-w-7xl mx-auto">
@@ -58,36 +72,36 @@ function Header() {
                   <a href="#" className="py-5 px-3 text-[#f8f8f8]">
                     News
                   </a>
-                  <div className="relative">
+                  <div className="relative py-3 ">
                     <button
                       type="button"
-                      className="flex items-center py-5 px-3 text-[#f8f8f8] hover:bg-white hover:text-gray-800 rounded-md "
+                      className=" flex items-center hover:bg-white rounded-md py-2 px-1 hover:text-gray-800"
                       aria-expanded="false"
                       onClick={toggleDropdown}
                     >
                       <span>Pages</span>
                       <svg
-                        class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+                        className="text-gray-400 ml-2 w-4 h-4 group-hover:text-gray-500"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                         aria-hidden="true"
                       >
                         <path
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                           d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                          clip-rule="evenodd"
+                          clipRule="evenodd"
                         />
                       </svg>
                     </button>
                     {dropdownMenu && (
                       <div className="absolute top-12 left-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-20">
                         <a href="#" className="block px-4 py-2 text-gray-800">
-                          <MdDashboard className="inline-block mr-2" />
+                          <MdDashboard className="inline-block mr-2 text-[#20b2a6]" />
                           Admin Dashboard
                         </a>
                         <a href="#" className="block px-4 py-2 text-gray-800">
-                          <MdDashboard className="inline-block mr-2" />
+                          <MdDashboard className="inline-block mr-2 text-[#20b2a6]" />
                           Teacher Dashboard
                         </a>
                         <a href="#" className="block px-4 py-2 text-gray-800">
@@ -97,7 +111,7 @@ function Header() {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="inline-block mr-2 h-5 w-5"
+                            className="inline-block mr-2 h-5 w-5 text-[#20b2a6]"
                           >
                             <path
                               strokeLinecap="round"
@@ -106,6 +120,12 @@ function Header() {
                             />
                           </svg>
                           Students
+                        </a>
+                        <a
+                          href="/login"
+                          className="block px-4 py-2 text-gray-800"
+                        >
+                          Sign Out
                         </a>
                       </div>
                     )}
@@ -198,36 +218,36 @@ function Header() {
             <a href="#" className="block py-2 px-4 text-sm">
               Contacts
             </a>
-            <div className="relative px-2">
+            <div className="relative px-1">
               <button
                 type="button"
-                class="py-1.5 px-4 text-sm text-[#f8f8f8] flex items-center hover:bg-white hover:text-gray-800 rounded-md"
+                className="py-1.5 px-4 text-sm text-[#f8f8f8] flex items-center hover:bg-white hover:text-gray-800 rounded-md"
                 aria-expanded="false"
                 onClick={toggleDropdown}
               >
                 <span>Pages</span>
                 <svg
-                  class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+                  className="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   aria-hidden="true"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </button>
               {dropdownMenu && (
                 <div className="absolute left-5 top-7 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-20">
                   <a href="#" className="block px-4 py-2 text-gray-800">
-                    <MdDashboard className="inline-block mr-2 mb-1" />
+                    <MdDashboard className="inline-block mr-2 mb-1  text-[#20b2a6]" />
                     Admin Dashboard
                   </a>
                   <a href="#" className="block px-4 py-2 text-gray-800">
-                    <MdDashboard className="inline-block mr-2" />
+                    <MdDashboard className="inline-block mr-2  text-[#20b2a6]" />
                     Teacher Dashboard
                   </a>
                   <a href="#" className="block px-4 py-2 text-gray-800">
@@ -237,7 +257,7 @@ function Header() {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="inline-block mr-2 h-5 w-5"
+                      className="inline-block mr-2 h-5 w-5  text-[#20b2a6]"
                     >
                       <path
                         strokeLinecap="round"
@@ -246,6 +266,9 @@ function Header() {
                       />
                     </svg>
                     Students
+                  </a>
+                  <a href="/login" className="block px-4 py-2 text-gray-800">
+                    Sign Out
                   </a>
                 </div>
               )}
