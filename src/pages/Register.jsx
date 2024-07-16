@@ -1,127 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 import StudentsForm from "../forms/StudentsForm";
 import TeacherForm from "../forms/TeacherForm";
 import AdminForm from "../forms/AdminForm";
+import { useForm } from "react-hook-form";
 
 function Register() {
+  const [role, setRole] = useState("");
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const handleRoleChange = (event) => {
+    setRole(event.target.value);
+  };
+
   return (
-    <>
-      <StudentsForm />;
-      <TeacherForm />
-      <AdminForm />
-    </>
+    // <>
+    <div className=" mx-auto bg-white rounded-lg px-8 py-10 flex flex-col items-center">
+      <div className="flex items-start flex-row justify-start gap-3">
+        <label htmlFor="role" className="text-sm text-gray-700">
+          Role:
+        </label>
+        <select
+          onChange={handleRoleChange}
+          // {...register("role", { required: true })}
+          className="w-full px-3 rounded-sm border border-gray-300 focus:outline-none "
+        >
+          <option value="" disabled>
+            Select your role
+          </option>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+          <option value="admin">Admin</option>
+        </select>
+        {errors.role && (
+          <span className="text-sm text-red-500">Role is required</span>
+        )}
+      </div>
+      {/* <div className="registration-container">
+        <h1>Register</h1>
+        <div className="role-selection">
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="student"
+              onChange={handleRoleChange}
+            />
+            Student
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="teacher"
+              onChange={handleRoleChange}
+            />
+            Teacher
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="admin"
+              onChange={handleRoleChange}
+            />
+            Admin
+          </label>
+        </div>
+      </div> */}
+      <>
+        {role === "student" && <StudentsForm />}
+        {role === "teacher" && <TeacherForm />}
+        {role === "admin" && <AdminForm />}
+      </>
+    </div>
   );
 }
 
 export default Register;
-
-// import React from "react";
-// import { useForm } from "react-hook-form";
-// import { useMutation } from "react-query";
-// import axios from "axios";
-
-// const Register = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     watch,
-//     formState: { errors },
-//   } = useForm();
-//   const role = watch("role");
-
-//   const mutation = useMutation((newUser) => axios.post("/users", newUser));
-
-//   const onSubmit = (data) => {
-//     mutation.mutate(data);
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit(onSubmit)}>
-//       <input
-//         type="email"
-//         {...register("email", { required: true })}
-//         placeholder="Email"
-//       />
-//       {errors.email && <span>Email is required</span>}
-
-//       <input
-//         type="password"
-//         {...register("password", { required: true, minLength: 6 })}
-//         placeholder="Password"
-//       />
-//       {errors.password && <span>Password must be at least 6 characters</span>}
-
-//       <input
-//         type="password"
-//         {...register("passwordConfirmation", {
-//           required: true,
-//           validate: (value) => value === watch("password"),
-//         })}
-//         placeholder="Confirm Password"
-//       />
-//       {errors.passwordConfirmation && <span>Passwords must match</span>}
-
-//       <input
-//         type="text"
-//         {...register("name", { required: true })}
-//         placeholder="Full Name"
-//       />
-//       {errors.name && <span>Name is required</span>}
-
-//       <select {...register("role", { required: true })}>
-//         <option value="student">Student</option>
-//         <option value="teacher">Teacher</option>
-//         <option value="admin">Admin</option>
-//       </select>
-//       {errors.role && <span>Role is required</span>}
-
-//       {role === "student" && (
-//         <>
-//           <input
-//             type="date"
-//             {...register("date_of_birth")}
-//             placeholder="Date of Birth"
-//           />
-//           <input type="text" {...register("grade")} placeholder="Grade" />
-//           <input
-//             type="text"
-//             {...register("guardian_contact")}
-//             placeholder="Guardian Contact"
-//           />
-//         </>
-//       )}
-
-//       {role === "teacher" && (
-//         <>
-//           <input
-//             type="text"
-//             {...register("subject_specialization")}
-//             placeholder="Subject Specialization"
-//           />
-//           <input
-//             type="text"
-//             {...register("qualifications")}
-//             placeholder="Qualifications"
-//           />
-//           <input
-//             type="text"
-//             {...register("contact_number")}
-//             placeholder="Contact Number"
-//           />
-//         </>
-//       )}
-
-//       {role === "admin" && (
-//         <input
-//           type="text"
-//           {...register("contact_number")}
-//           placeholder="Contact Number"
-//         />
-//       )}
-
-//       <button type="submit">Register</button>
-//     </form>
-//   );
-// };
-
-// export default Register;
